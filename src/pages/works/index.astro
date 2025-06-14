@@ -16,10 +16,10 @@ const works = await getWorks({
       {
         works.contents.map((work: Work) => (
           <Card
+            id={work.id}
             title={work.title}
             publishedAt={work.publishedAt}
-            imageUrl={work.mainvisual.url}
-            link={`/works/${work.id}`}
+            imgSrc={work.mainvisual.url}
           />
         ))
       }

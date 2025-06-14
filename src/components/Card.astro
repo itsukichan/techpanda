@@ -2,39 +2,44 @@
 import { Image } from 'astro:assets'
 import { formatDate } from '@utils/date'
 import Tag from './Tag.astro'
+import type { CardProps } from '@types/components'
 
 interface Props {
+  id: string;
   title: string;
   publishedAt: string;
-  imageUrl: string;
-  link: string;
+  imgSrc: string;
+  imgAlt?: string;
+  link?: string;
   tags?: string[];
 }
 
-const { title, publishedAt, imageUrl, link, tags } = Astro.props;
+const { id, title, publishedAt, imgSrc, imgAlt, link, tags } = Astro.props;
+const cardLink = link || `/works/${id}`;
 ---
 
 <article
   class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark shadow-lg hover:shadow-xl
   transition-all duration-300 animate-fade-in hover:-translate-y-1"
 >
-  <a href={link} class="relative block h-48 sm:h-52 overflow-hidden">
+  <a href={cardLink} class="relative block h-48 sm:h-52 overflow-hidden">
     <div class="absolute inset-0 bg-gray-900/10 dark:bg-black/30 group-hover:bg-gray-900/20 dark:group-hover:bg-black/40 transition-colors z-10"></div>
     <Image
-      src={imageUrl}
-      alt={title}
+      src={imgSrc}
+      alt={imgAlt || `${title}のサムネイル画像`}
       width={800}
       height={400}
       class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
       format="webp"
       quality={80}
+      loading="lazy"
     />
   </a>
 
   <div class="flex flex-1 flex-col justify-between p-6 bg-white dark:bg-background-dark">
     <div class="flex-1">
       <a
-        href={link}
+        href={cardLink}
         class="block group-hover:text-accent dark:group-hover:text-accent transition-colors"
       >
         <h3 class="text-xl font-semibold text-gray-900 dark:text-background-light">

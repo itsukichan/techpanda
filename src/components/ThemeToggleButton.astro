@@ -1,6 +1,16 @@
+---
+import type { ThemeToggleButtonProps } from '@types/components';
+
+export interface Props extends ThemeToggleButtonProps {}
+
+const { ariaPressed = false } = Astro.props;
+---
+
 <button id="toggle" type="button"
-  class="relative flex h-8 w-14 cursor-pointer items-center justify-center rounded-full bg-secondary-accent shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl dark:bg-accent mr-4 sm:mr-6 ml-auto">
-  <span class="sr-only">change color theme</span>
+  class="relative flex h-8 w-14 cursor-pointer items-center justify-center rounded-full bg-secondary-accent shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl dark:bg-accent mr-4 sm:mr-6 ml-auto"
+  aria-pressed={ariaPressed}
+  aria-label="カラーテーマの切り替え">
+  <span class="sr-only">カラーテーマを変更</span>
   <span aria-hidden="true" id="toggle-icon"
     class="absolute left-1 flex h-6 w-6 transform items-center justify-center rounded-full bg-background-light shadow-md transition-transform duration-300 ease-in-out">
     <svg id="icon-dark" viewBox="0 0 24 24" focusable="false" class="h-4 w-4 hidden text-accent opacity-90" aria-hidden="true">
@@ -52,13 +62,16 @@
       }
 
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      toggle.setAttribute('aria-pressed', isDark.toString());
     }
 
     // 初期テーマの設定
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    const isDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    
+    if (isDarkMode) {
       document.documentElement.classList.add('dark');
       toggleIcon.classList.add('translate-x-6');
       iconLight.classList.add('hidden');
@@ -68,6 +81,8 @@
       iconLight.classList.remove('hidden');
       iconDark.classList.add('hidden');
     }
+    
+    toggle.setAttribute('aria-pressed', isDarkMode.toString());
 
     toggle.addEventListener('click', toggleTheme);
     mounted = true;
