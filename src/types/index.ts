@@ -1,5 +1,8 @@
 export type SocialIconType = 'github' | 'twitter' | 'facebook';
 
+// Re-export component types
+export * from './components';
+
 export interface Section {
   title: string;
   link: string;
@@ -28,4 +31,19 @@ export interface BlogPost {
   };
   tags?: string[];
   content?: string;
+}
+
+// MicroCMS API Response Types
+export interface MicroCMSListResponse<T> {
+  contents: T[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+}
+
+export interface MicroCMSDetailResponse<T> extends T {
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+  revisedAt?: string;
 }

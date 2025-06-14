@@ -1,6 +1,9 @@
 ---
+import type { TextProps } from '@types/components';
 
-const { text = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae sint consequuntur vel. Amet ut nobis explicabo numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.' } = Astro.props;
+export interface Props extends TextProps {}
+
+const { text = '' } = Astro.props;
 ---
 
 <p class="mt-2 text-background-dark dark:text-background-light">

@@ -1,5 +1,9 @@
 ---
-const { link, text, color, blank } = Astro.props;
+import type { ButtonProps } from '@types/components';
+
+export interface Props extends ButtonProps {}
+
+const { link, text, color = 'accent', blank = false } = Astro.props;
 const buttonClass = color === 'accent' ? 'bg-accent' : 'bg-secondary-accent';
 ---
 
