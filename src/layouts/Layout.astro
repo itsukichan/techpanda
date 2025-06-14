@@ -56,6 +56,10 @@ const metaDescription = ogDescription || description;
     
     <title>{title}</title>
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/favicon.ico" as="image">
+    <link rel="dns-prefetch" href="https://images.microcms-assets.io">
+    
     {noindex && (
       <>
         <meta name="robots" content="noindex, nofollow, noarchive" />
@@ -63,7 +67,9 @@ const metaDescription = ogDescription || description;
         <meta name="bingbot" content="noindex, nofollow, noarchive" />
       </>
     )}
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://rsms.me/inter/inter.css"></noscript>
     <meta name="view-transition" content="same-origin" />
     <script is:inline>
       // ダークモードの初期化スクリプト
