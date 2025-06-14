@@ -34,7 +34,7 @@ try {
   description={work.body ? work.body.substring(0, 160).replace(/<[^>]*>/g, '') + '...' : `${work.title}の詳細ページ`}
   ogTitle={work.title}
   ogImage={work.mainvisual.url}
-  noindex={false}
+  noindex={true}
 >
     <section class="container mx-auto  bg-opacity-25">
       <Image src={work.mainvisual.url} alt={`${work.title}のメインビジュアル`} width={1920} height={1080} class="w-full h-auto aspect-video object-cover" loading="eager" format="webp" quality={80} />

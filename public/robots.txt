@@ -1,5 +1,2 @@
 User-agent: *
-Disallow: /api/
-Disallow: /admin/
-
-Sitemap: https://techpanda.netlify.app/sitemap.xml
+Disallow: /
